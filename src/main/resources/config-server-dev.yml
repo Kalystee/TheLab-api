@@ -1,0 +1,7 @@
+### DO NEVER TOUCH THIS SECTION, NEITHER ADD A NEW PROPERTY
+### properties should be added into application.yml or into https://github.com/Kalystee/kal-config-store
+
+spring:
+  config:
+    import:
+      - "configserver:https://${KAL_ENV_CS_USERNAME}:${KAL_ENV_CS_PWD}@localhost:8088"

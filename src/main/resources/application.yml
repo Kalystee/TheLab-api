@@ -1,0 +1,113 @@
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-origins: "*"
+        allowed-methods:
+          - "GET"
+          - "POST"
+      exposure:
+        include: "*"
+    jmx:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    logfile:
+      enabled: true
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+    defaults:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: on_param
+    include-exception: false
+    include-stacktrace: always
+  ssl:
+    enabled: false
+  compression:
+    enabled: true
+    min-response-size: 4KB
+    mime-types:
+    - application/json
+    - text/plain
+    - text/csv
+    - text/html
+    - text/javascript
+
+spring:
+  main:
+    allow-bean-definition-overriding: false
+  application:
+    name: @project.artifactId@
+  profiles:
+    group:
+      DEV:
+        - DEV
+      PROD:
+        - PROD
+  mvc:
+    throw-exception-if-no-handler-found: false
+  jackson:
+    property-naming-strategy: LOWER_CAMEL_CASE
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+      write-dates-with-zone-id: true
+      write-bigdecimal-as-plain: true
+    deserialization:
+      fail-on-unknown-properties: false
+      adjust-dates-to-context-time-zone: false
+      use-big-decimal-for-floats: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/THE_LAB_DEV
+    username: kalystee
+    password: sauMon679!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    enabled: true
+    version: openapi_3_1
+
+---
+spring:
+  config:
+    activate:
+      on-profile: DEV
+    import:
+      - config-server-dev.yml
+
+---
+spring:
+  config:
+    activate:
+      on-profile: PROD
+    import:
+      - config-server-prod.yml
+
+
+
