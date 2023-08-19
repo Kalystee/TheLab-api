@@ -85,7 +85,7 @@ spring:
     enabled: true
 
 springdoc:
-  show-actuator: true
+  show-actuator: false
   api-docs:
     enabled: true
     version: openapi_3_1

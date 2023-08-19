@@ -4,4 +4,4 @@
 spring:
   config:
     import:
-      - "configserver:https://${KAL_ENV_CS_USERNAME}:${KAL_ENV_CS_PWD}@localhost:8088"
+      - "configserver:http://${KAL_ENV_CS_USERNAME}:${KAL_ENV_CS_PWD}@localhost:8088"
